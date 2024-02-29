@@ -10,10 +10,10 @@ import {
 let getAnimales = (async () => {
   try {
     let respuesta = await fetch("/animales.json");
-    let animals = await respuesta.json();
-    //console.log(animals);
+    let { animales } = await respuesta.json();
+    //console.log(animales);
 
-    return animals;
+    return animales;
   } catch (error) {
     console.log(error);
   }
@@ -21,13 +21,15 @@ let getAnimales = (async () => {
 
 //let tabla = document.getElementById("animales");
 let boton = document.getElementById("btnRegistrar");
+let modal = document.getElementById("exampleModal");
+let modalBody = modal.querySelector(".modal-body");
 
 animal.addEventListener("change", async () => {
   let animalEl = animal.value;
   //console.log(animalElegido);
-  let animals = (await getAnimales).animales;
-  //console.log(animals);
-  let resultado = animals.find((a) => a.name == animalEl);
+  let animales = await getAnimales;
+  //console.log(animales);
+  let resultado = animales.find((a) => a.name == animalEl);
   //console.log(resultado);
 
   document.getElementById(
@@ -46,69 +48,68 @@ let infoCard = async () => {
   let img = document.getElementById("preview");
 
   if (Animal == "Leon") {
-    let Leon = new Animal(nombre, edad, img, comentarios, sonido);
+    let newLeon = new Animal(nombre, edad, img, comentarios, sonido);
   } else if (Animal == "Lobo") {
-    let Lobo = new Animal(nombre, edad, img, comentarios, sonido);
+    let newLobo = new Animal(nombre, edad, img, comentarios, sonido);
   } else if (Animal == "Oso") {
-    let Oso = new Animal(nombre, edad, img, comentarios, sonido);
+    let newOso = new Animal(nombre, edad, img, comentarios, sonido);
   } else if (Animal == "Serpiente") {
-    let Serpiente = new Animal(nombre, edad, img, comentarios, sonido);
+    let newSerpiente = new Animal(nombre, edad, img, comentarios, sonido);
   } else {
     let Aguila = new Animal(nombre, edad, img, comentarios, sonido);
   }
   let animalElegido = new Animal(nombre, edad, img, comentarios, sonido);
   //console.log(animalElegido);
 
-  let animalEl = animal.value;
-  let animals = (await getAnimales).animales;
-  //console.log(animals);
+  // let div = document.createElement("div");
+  let animales = await getAnimales;
 
-  let resultado = animals.find((a) => a.name == animalEl);
+  let resultado = animales.find((a) => a.name == nombre);
 
-  let modal = document.querySelector(".modal-body");
-  console.log(modal);
-  modal.innerHTML = `
+  modalBody.innerHTML = `
         <div class="card container text-center col col-sm bg-secondary text-dark">
         <div class="card-header bg-dark text-light">
         <h2>${animalElegido.nombre}</h2></div>
         <div class="card-body">
-          <img src="assets/imgs/${resultado.imagen}" width="300px" class="my-4">
+          <img src="assets/imgs/${resultado.imagen}" width="450px" class="my-4 container">
           <h6 class="text-light">Edad: ${animalElegido.edad}</h3>
           <p class="card-text text-light">
             "${animalElegido.comentarios}"
           </p>
-        </div>
-        <div class="card-footer text-body-secondary bg-dark" src="assets/sounds/${resultado.sonido}">
-          <img src="./assets/imgs/audio.svg" alt="audio img" width="40px" />
-        </div>
       </div>`;
+  //console.log(resultado)
+  //console.log(div);
+  //modal.appendChild(div);
+  $(modal).modal("show");
 };
 
 let agregarCard = async () => {
   let agregar = document.getElementById("Animales");
   let div = document.createElement("div");
   let animalEl = animal.value;
-  let animals = (await getAnimales).animales;
+  let animales = await getAnimales;
 
-  let resultado = animals.find((a) => a.name == animalEl);
+  let resultado = animales.find((a) => a.name == animalEl);
 
   div.innerHTML = `<div class="text-center col col-sm bg-secondary m-3 p-2">
          <img src="assets/imgs/${resultado.imagen}" width="150px" id="cardMini" class="m-2">
        <div class="body-secondary" src="assets/sounds/${resultado.sonido}" type="audio/mpeg">
        <img src="./assets/imgs/audio.svg" alt="audio img" width="25px"/>
-     </div>`;
+     </div> </div>`;
 
   agregar.appendChild(div);
 
-  //console.log(div);
-
-  let cardMini = document.getElementById("cardMini");
-
-  cardMini.addEventListener("click", (e) => {
-    infoCard().display, "block";
+  div.addEventListener("click", (e) => {
+    infoCard();
   });
 };
 
 boton.addEventListener("click", (e) => {
   e.preventDefault(), agregarCard();
 });
+
+// let cardMini = document.getElementById("cardMini");
+
+// cardMini.addEventListener("click", (e) => {
+//   modal.style.display = "block";
+// });
