@@ -33,7 +33,7 @@ class Leon extends Animal {
   }
 
   rugir() {
-    audio.setAttribute("src", `./assets/sounds/${this._sonido}`);
+    audio.setAttribute("src", `./assets/sounds/${this._sonido}.mp3`);
     audio.onplay()
   }
 }
@@ -43,7 +43,7 @@ class Lobo extends Animal {
     super(nombre, edad, img, comentarios, sonido);
   }
   aullar() {
-    audio.setAttribute("src", `./assets/sounds/${this._sonido}`);
+    audio.setAttribute("src", `./assets/sounds/${this._sonido}.mp3`);
     audio.onplay();
   }
 }
@@ -53,7 +53,7 @@ class Oso extends Animal {
     super(nombre, edad, img, comentarios, sonido);
   }
   griñir() {
-    audio.setAttribute("src", `./assets/sounds/${this._sonido}`);
+    audio.setAttribute("src", `./assets/sounds/${this._sonido}.mp3`);
     audio.onplay();
   }
 }
@@ -63,7 +63,7 @@ class Serpiente extends Animal {
     super(nombre, edad, img, comentarios, sonido);
   }
   sisear() {
-    audio.setAttribute("src", `./assets/sounds/${this._sonido}`);
+    audio.setAttribute("src", `./assets/sounds/${this._sonido}.mp3`);
     audio.onplay();
   }
 }
@@ -73,7 +73,7 @@ class Aguila extends Animal {
     super(nombre, edad, img, comentarios, sonido);
   }
   chillar() {
-    audio.setAttribute("src", `./assets/sounds/${this._sonido}`);
+    audio.setAttribute("src", `./assets/sounds/${this._sonido}.mp3`);
     audio.onplay();
   }
 }

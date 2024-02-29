@@ -71,7 +71,7 @@ let infoCard = async () => {
         <div class="card-header bg-dark text-light">
         <h2>${animalElegido.nombre}</h2></div>
         <div class="card-body">
-          <img src="assets/imgs/${resultado.imagen}" width="450px" class="my-4 container">
+          <img src="assets/imgs/${resultado.imagen}" class="my-4 container">
           <h6 class="text-light">Edad: ${animalElegido.edad}</h3>
           <p class="card-text text-light">
             "${animalElegido.comentarios}"
@@ -92,9 +92,9 @@ let agregarCard = async () => {
   let resultado = animales.find((a) => a.name == animalEl);
 
   div.innerHTML = `<div class="text-center col col-sm bg-secondary m-3 p-2">
-         <img src="assets/imgs/${resultado.imagen}" width="150px" id="cardMini" class="m-2">
+         <img src="assets/imgs/${resultado.imagen}" width="150px" class="m-2">
        <div class="body-secondary" src="assets/sounds/${resultado.sonido}" type="audio/mpeg">
-       <img src="./assets/imgs/audio.svg" alt="audio img" width="25px"/>
+       <img src="./assets/imgs/audio.svg" id="sonido" alt="audio img" width="25px"/>
      </div> </div>`;
 
   agregar.appendChild(div);
@@ -102,14 +102,10 @@ let agregarCard = async () => {
   div.addEventListener("click", (e) => {
     infoCard();
   });
+
+  console.log(div);
 };
 
 boton.addEventListener("click", (e) => {
   e.preventDefault(), agregarCard();
 });
-
-// let cardMini = document.getElementById("cardMini");
-
-// cardMini.addEventListener("click", (e) => {
-//   modal.style.display = "block";
-// });
