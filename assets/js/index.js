@@ -9,7 +9,7 @@ import {
 
 let getAnimales = (async () => {
   try {
-    let respuesta = await fetch("/animales.json");
+    let respuesta = await fetch("./animales.json");
     let { animales } = await respuesta.json();
     //console.log(animales);
 
